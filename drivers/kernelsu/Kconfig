@@ -1,0 +1,66 @@
+cat > drivers/kernelsu/Kconfig << 'EOF'
+menu "KernelSU"
+
+config KSU
+	bool "KernelSU support"
+	depends on OVERLAY_FS
+	default y
+	help
+	  Enable KernelSU (BakaSU) support.
+
+config KSU_MANUAL_HOOK
+	bool "Manual Hook mode"
+	depends on KSU
+	default y
+	help
+	  Use Manual Hook instead of kprobes.
+	  Recommended for non-GKI / older kernels (4.9, 4.14, etc).
+
+config KSU_DEBUG
+	bool "KernelSU debug mode"
+	depends on KSU
+	default n
+
+# SuSFS options (jika sudah di-apply)
+config KSU_SUSFS
+	bool "SuSFS support"
+	depends on KSU
+	default y
+
+config KSU_SUSFS_SUS_PATH
+	bool "SuSFS SUS_PATH"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_SUS_MOUNT
+	bool "SuSFS SUS_MOUNT"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_SUS_KSTAT
+	bool "SuSFS SUS_KSTAT"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_SUS_KSTATFS
+	bool "SuSFS SUS_KSTATFS"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_TRY_UMOUNT
+	bool "SuSFS TRY_UMOUNT"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_SPOOF_UNAME
+	bool "SuSFS SPOOF_UNAME"
+	depends on KSU_SUSFS
+	default y
+
+config KSU_SUSFS_ENABLE_LOG
+	bool "SuSFS enable log"
+	depends on KSU_SUSFS
+	default n
+
+endmenu
+EOF
