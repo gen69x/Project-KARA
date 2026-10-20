@@ -1847,10 +1847,10 @@ out_files:
 	if (displaced)
 		reset_files_struct(displaced);
 out_ret:
-	putname(filename);
 #ifdef CONFIG_KSU_MANUAL_HOOK
 	ksu_handle_post_execveat(&fd, &filename, &argv, &envp, &flags, &retval);
 #endif
+        putname(filename);
 	return retval;
 }
 
